@@ -9,17 +9,36 @@ const { Content, Sider } = Layout;
 
 const RentPhone: React.FC = () => {
   const [currentView, setCurrentView] = useState('1');
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   const renderContent = () => {
     switch (currentView) {
       case '1':
-        return <FastRent />;
+        return <div>Thông tin tài khoản</div>;
       case '2':
-        return <div>Thuê Số Tùy Chọn</div>;
+        return <div>Nạp tiền</div>;
       case '3':
-        return <div>Lịch Sử Thuê Số</div>;
+        return <div>Lịch sử nạp tiền</div>;
       case '4':
+        return <FastRent />;
+      case '5':
+        return <div>Thuê Số Tùy Chọn</div>;
+      case '6':
         return <div>Danh Sách Dịch Vụ</div>;
+      case '7':
+        return <div>Lịch Sử Thuê Số</div>;
+      case '8':
+        return <div>Nhận Hoa Hồng</div>;
+      case '9':
+        return <div>Lịch Sử Chung</div>;
+      case '10':
+        return <div>Tài Liệu API</div>;
+      case '11':
+        return <div>Hướng dẫn</div>;
       default:
         return null;
     }
@@ -27,8 +46,8 @@ const RentPhone: React.FC = () => {
 
   return (
     <Layout>
-      <Sider collapsible>
-        <Sidebar setCurrentView={setCurrentView} />
+      <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
+        <Sidebar setCurrentView={setCurrentView} collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
       </Sider>
       <Layout>
         <Header />
