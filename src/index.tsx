@@ -1,18 +1,11 @@
-// src/index.tsx
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
+import './css/style.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-// Comment or remove the following lines if not using reportWebVitals
-// import reportWebVitals from './reportWebVitals';
-// reportWebVitals();

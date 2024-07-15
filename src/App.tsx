@@ -1,15 +1,13 @@
-// src/App.tsx
 import React from 'react';
-import RentPhone from './components/RentPhone';
-import './styles/style.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import RentPhone from './pages/RentPhone';
 
-const App: React.FC = () => {
-  return (
-    <div className="container">
-      <h1>Rental Phone OTP</h1>
-      <RentPhone />
-    </div>
-  );
-};
+const App: React.FC = () => (
+  <Router>
+    <Switch>
+      <Route path="/" component={RentPhone} />
+    </Switch>
+  </Router>
+);
 
 export default App;

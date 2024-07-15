@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Select, Input, Button, Table, message } from 'antd';
-import { ColumnsType } from 'antd/es/table';
 
 const { Option } = Select;
 
@@ -22,7 +21,7 @@ interface RentedPhone {
   message: string;
 }
 
-const RentPhone: React.FC = () => {
+const FastRent: React.FC = () => {
   const [country, setCountry] = useState('vn');
   const [services, setServices] = useState<Service[]>([]);
   const [serviceId, setServiceId] = useState<string>('');
@@ -53,7 +52,7 @@ const RentPhone: React.FC = () => {
     }
   };
 
-  const columns: ColumnsType<RentedPhone> = [
+  const columns = [
     { title: '#', dataIndex: 'id', key: 'id' },
     { title: 'Dịch vụ', dataIndex: 'serviceId', key: 'serviceId' },
     { title: 'Giá', dataIndex: 'price', key: 'price' },
@@ -112,4 +111,4 @@ const RentPhone: React.FC = () => {
   );
 };
 
-export default RentPhone;
+export default FastRent;
