@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
 import FastRent from '../components/FastRent';
+import AccountInfo from '../components/AccountInfo';
 import '../css/style.css';
+import Navbar from '../components/Navbar';
 
 const { Content, Sider } = Layout;
 
@@ -18,7 +19,7 @@ const RentPhone: React.FC = () => {
   const renderContent = () => {
     switch (currentView) {
       case '1':
-        return <div>Thông tin tài khoản</div>;
+        return <AccountInfo />;
       case '2':
         return <div>Nạp tiền</div>;
       case '3':
@@ -45,13 +46,13 @@ const RentPhone: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <Sidebar setCurrentView={setCurrentView} collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
       </Sider>
       <Layout>
-        <Header />
-        <Content>
+        <Navbar />
+        <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
           {renderContent()}
         </Content>
       </Layout>

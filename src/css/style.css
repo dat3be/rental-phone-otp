@@ -15,6 +15,18 @@ code {
   height: 100vh;
 }
 
+.navbar {
+  background: #fff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
 .ant-layout-header {
   background: #fff;
   padding: 0 20px;
@@ -60,10 +72,7 @@ code {
 }
 
 .ant-layout-content {
-  margin: 24px 16px;
-  padding: 24px;
-  background: #fff;
-  min-height: 280px;
+  margin-top: 64px; /* Đảm bảo nội dung không bị Navbar che */
 }
 
 .fast-rent {
