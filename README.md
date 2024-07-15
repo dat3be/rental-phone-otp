@@ -1,46 +1,147 @@
-# Getting Started with Create React App
+# Rental Phone OTP Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web application for renting phone numbers to receive OTP (One-Time Password) messages. The application allows users to quickly rent phone numbers for various services and provides a history of rentals and top-ups.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Quick Rent**: Rent phone numbers quickly for various services.
+- **Payment Methods**: Different payment methods for renting phone numbers.
+- **Payment History**: View history of all top-ups and transactions.
+- **Service List**: List of available services for renting phone numbers.
+- **Account Information**: View and manage account information.
+- **API Documentation**: Documentation for the available APIs.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React, Ant Design
+- **Backend**: Node.js, Express (for proxy server)
+- **HTTP Client**: Axios
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup and Installation
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or above)
+- npm or yarn
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/rental-phone-otp.git
+    cd rental-phone-otp
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Start the proxy server:**
+    ```bash
+    node proxy-server/server.js
+    ```
 
-### `npm run eject`
+4. **Start the development server:**
+    ```bash
+    npm start
+    # or
+    yarn start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+├── public
+│   ├── index.html
+├── src
+│   ├── components
+│   │   ├── AccountInfo.tsx
+│   │   ├── FastRent.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── PaymentHistory.tsx
+│   │   ├── PaymentMethods.tsx
+│   │   ├── Sidebar.tsx
+│   ├── css
+│   │   └── style.css
+│   ├── pages
+│   │   └── RentPhone.tsx
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── reportWebVitals.ts
+│   ├── setupTests.ts
+├── proxy-server
+│   └── server.js
+├── .gitignore
+├── package.json
+├── README.md
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The application uses an external API to fetch available services. To avoid CORS issues, a proxy server is used.
 
-## Learn More
+### Proxy Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The proxy server is set up using Node.js and Express to handle API requests and avoid CORS issues. The proxy server runs on port 4000.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Endpoint
+
+- **Get Services**: `/api/service/getv2?token=<your_token>&country=vn`
+
+### Example Usage
+
+To fetch available services, send a GET request to: http://localhost:4000/api/service/getv2?token=e294527c11ab48d99a90563fea32d4c3&country=vn
+
+
+### Proxy Server Code
+
+The proxy server is defined in `proxy-server/server.js`:
+
+```javascript
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+
+const app = express();
+const port = 4000; // You can change the port if needed
+
+app.use(cors());
+
+app.get('/api/service/getv2', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.viotp.com/service/getv2', {
+      params: {
+        token: 'e294527c11ab48d99a90563fea32d4c3',
+        country: 'vn'
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching data from API' });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Proxy server running at http://localhost:${port}`);
+});
+```
+
+Ensure the proxy server is running by executing:
+```bash
+node proxy-server/server.js
+```
+
+## Notes
+
+- Ensure the proxy server is running to avoid CORS issues during development.
+- Adjust the API token and endpoint as per your requirements.
+- When deploying to production, ensure to configure the server to handle CORS properly or use a backend service to manage API requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
