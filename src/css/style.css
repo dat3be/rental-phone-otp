@@ -80,7 +80,9 @@ code {
 .ant-layout-content {
   margin-top: 64px; /* Đảm bảo nội dung không bị Navbar che */
   margin-left: 200px; /* Đảm bảo nội dung không bị Sidebar che */
-  padding-top: 64px; /* Đảm bảo nội dung không bị Navbar che */
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
 }
 
 .fast-rent {
@@ -163,4 +165,10 @@ code {
 
 .full-width {
   width: 100%;
+}
+
+.note {
+  background: #fff3cd;
+  padding: 16px;
+  border-radius: 4px;
 }

@@ -11,7 +11,7 @@ import Navbar from '../components/Navbar';
 const { Content, Sider } = Layout;
 
 const RentPhone: React.FC = () => {
-  const [currentView, setCurrentView] = useState('1');
+  const [currentView, setCurrentView] = useState('4'); // Đặt mặc định là '4' để hiển thị FastRent
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => {
@@ -54,7 +54,7 @@ const RentPhone: React.FC = () => {
       </Sider>
       <Layout>
         <Navbar />
-        <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+        <Content style={{ marginTop: '64px', marginLeft: '200px', padding: '24px', background: '#fff', minHeight: '280px' }}>
           {renderContent()}
         </Content>
       </Layout>

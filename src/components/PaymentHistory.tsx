@@ -1,9 +1,8 @@
 import React from 'react';
-import { Table, Input, Button, Row, Col, DatePicker, Select, Typography } from 'antd';
+import { Table, Button, Row, Col, DatePicker, Select, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import '../css/style.css';
 
-const { RangePicker } = DatePicker;
 const { Option } = Select;
 const { Title, Text } = Typography;
 

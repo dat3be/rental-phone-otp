@@ -19,6 +19,34 @@ interface SidebarProps {
   toggleCollapsed: () => void;
 }
 
+const items = [
+  { label: 'Thông tin tài khoản', key: '1', icon: <UserOutlined /> },
+  { label: 'Nạp tiền', key: '2', icon: <WalletOutlined /> },
+  { label: 'Lịch sử nạp tiền', key: '3', icon: <HistoryOutlined /> },
+  {
+    label: 'Thuê Số',
+    key: 'g1',
+    type: 'group',
+    children: [
+      { label: 'Thuê số nhanh', key: '4', icon: <FileOutlined /> },
+      { label: 'Thuê số tùy chọn', key: '5', icon: <AppstoreOutlined /> },
+      { label: 'Danh sách dịch vụ', key: '6', icon: <BookOutlined /> },
+      { label: 'Lịch sử thuê số', key: '7', icon: <HistoryOutlined /> },
+    ],
+  },
+  {
+    label: 'Tài Khoản',
+    key: 'g2',
+    type: 'group',
+    children: [
+      { label: 'Nhận hoa hồng', key: '8', icon: <DollarOutlined /> },
+      { label: 'Lịch sử chung', key: '9', icon: <HistoryOutlined /> },
+      { label: 'Tài liệu API', key: '10', icon: <BookOutlined /> },
+    ],
+  },
+  { label: 'Hướng dẫn', key: '11', icon: <InfoCircleOutlined /> },
+];
+
 const Sidebar: React.FC<SidebarProps> = ({ setCurrentView, collapsed, toggleCollapsed }) => (
   <>
     <div className="logo-container">
@@ -33,48 +61,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentView, collapsed, toggleColl
       theme="dark"
       defaultSelectedKeys={['1']}
       mode="inline"
-      onClick={(e) => setCurrentView(e.key as string)}
-      inlineCollapsed={collapsed}
-    >
-      <Menu.Item key="1" icon={<UserOutlined />} className="menu-item">
-        Thông tin tài khoản
-      </Menu.Item>
-      <Menu.Item key="2" icon={<WalletOutlined />} className="menu-item">
-        Nạp tiền
-      </Menu.Item>
-      <Menu.Item key="3" icon={<HistoryOutlined />} className="menu-item">
-        Lịch sử nạp tiền
-      </Menu.Item>
-      <Menu.ItemGroup key="g1" title="Thuê Số">
-        <Menu.Item key="4" icon={<FileOutlined />} className="menu-item">
-          Thuê số nhanh
-        </Menu.Item>
-        <Menu.Item key="5" icon={<AppstoreOutlined />} className="menu-item">
-          Thuê số tùy chọn
-        </Menu.Item>
-        <Menu.Item key="6" icon={<BookOutlined />} className="menu-item">
-          Danh sách dịch vụ
-        </Menu.Item>
-        <Menu.Item key="7" icon={<HistoryOutlined />} className="menu-item">
-          Lịch sử thuê số
-        </Menu.Item>
-      </Menu.ItemGroup>
-      <Menu.ItemGroup key="g2" title="Tài Khoản">
-        <Menu.Item key="8" icon={<DollarOutlined />} className="menu-item">
-          Nhận hoa hồng
-        </Menu.Item>
-        <Menu.Item key="9" icon={<HistoryOutlined />} className="menu-item">
-          Lịch sử chung
-        </Menu.Item>
-        <Menu.Item key="10" icon={<BookOutlined />} className="menu-item">
-          Tài liệu API
-        </Menu.Item>
-      </Menu.ItemGroup>
-      <hr />
-      <Menu.Item key="11" icon={<InfoCircleOutlined />} className="menu-item">
-        Hướng dẫn
-      </Menu.Item>
-    </Menu>
+      items={items}
+      onClick={(e) => setCurrentView(e.key)}
+    />
   </>
 );
 
