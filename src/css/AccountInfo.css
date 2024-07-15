@@ -1,0 +1,19 @@
+/* AccountInfo.css */
+.account-info-container {
+    padding: 24px;
+  }
+  
+  .account-info-card {
+    margin-bottom: 24px;
+  }
+  
+  .avatar-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .info-item {
+    margin-bottom: 16px;
+  }
+  

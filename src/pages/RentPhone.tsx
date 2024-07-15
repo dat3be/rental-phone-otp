@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import Sidebar from '../components/Sidebar';
 import FastRent from '../components/FastRent';
 import AccountInfo from '../components/AccountInfo';
+import PaymentMethods from '../components/PaymentMethods';
+import PaymentHistory from '../components/PaymentHistory';
 import '../css/style.css';
 import Navbar from '../components/Navbar';
 
@@ -21,9 +23,9 @@ const RentPhone: React.FC = () => {
       case '1':
         return <AccountInfo />;
       case '2':
-        return <div>Nạp tiền</div>;
+        return <PaymentMethods />;
       case '3':
-        return <div>Lịch sử nạp tiền</div>;
+        return <PaymentHistory />;
       case '4':
         return <FastRent />;
       case '5':

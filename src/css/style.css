@@ -16,17 +16,20 @@ code {
 }
 
 .navbar {
-  background: #fff;
+  background: #ffffff;
   padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 24px;
+  position: fixed;
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  z-index: 1000;
+  top: 0;
 }
 
 .ant-layout-header {
-  background: #fff;
+  background: #ffffff;
   padding: 0 20px;
   display: flex;
   align-items: center;
@@ -37,11 +40,16 @@ code {
 .ant-layout-sider {
   background: #001529;
   transition: all 0.3s;
-  width: 300px; /* Tăng chiều rộng */
+  width: 200px; /* Điều chỉnh chiều rộng của Sidebar */
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1001;
 }
 
 .ant-layout-sider:hover {
-  width: 300px; /* Đảm bảo chiều rộng khi hover */
+  width: 200px; /* Đảm bảo chiều rộng khi hover */
 }
 
 .ant-layout-sider .ant-menu-item,
@@ -70,10 +78,9 @@ code {
 }
 
 .ant-layout-content {
-  margin: 24px 16px;
-  padding: 24px;
-  background: #fff;
-  min-height: 280px;
+  margin-top: 64px; /* Đảm bảo nội dung không bị Navbar che */
+  margin-left: 200px; /* Đảm bảo nội dung không bị Sidebar che */
+  padding-top: 64px; /* Đảm bảo nội dung không bị Navbar che */
 }
 
 .fast-rent {
@@ -126,4 +133,34 @@ code {
   cursor: pointer;
   color: white;
   font-size: 24px;
+}
+
+.payment-methods {
+  padding: 24px;
+}
+
+.payment-card {
+  transition: box-shadow 0.3s;
+}
+
+.payment-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.payment-row {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 0;
+}
+
+.payment-img {
+  width: 100px;
+  transition: transform 0.3s;
+}
+
+.payment-img:hover {
+  transform: scale(1.1);
+}
+
+.full-width {
+  width: 100%;
 }
