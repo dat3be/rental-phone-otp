@@ -80,7 +80,7 @@ const getViewName = (view: string) => {
     case '3':
       return 'Lịch sử nạp tiền';
     case '4':
-      return 'Thuê Số nhanh';
+      return 'Thuê số nhanh';
     case '5':
       return 'Thuê số tùy chọn';
     case '6':
