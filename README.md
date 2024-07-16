@@ -9,6 +9,7 @@ This project is a web application for renting phone numbers to receive OTP (One-
 - **Payment History**: View history of all top-ups and transactions.
 - **Service List**: List of available services for renting phone numbers.
 - **Account Information**: View and manage account information.
+- **Referral Program**: Invite friends and earn rewards.
 - **API Documentation**: Documentation for the available APIs.
 
 ## Technologies Used
@@ -59,13 +60,22 @@ This project is a web application for renting phone numbers to receive OTP (One-
 ├── src
 │   ├── components
 │   │   ├── AccountInfo.tsx
+│   │   ├── CustomRent.tsx
 │   │   ├── FastRent.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── PaymentHistory.tsx
 │   │   ├── PaymentMethods.tsx
+│   │   ├── Referral.tsx
+│   │   ├── ServiceList.tsx
 │   │   ├── Sidebar.tsx
+│   │   ├── HistoryRent.tsx
+│   │   ├── GeneralHistory.tsx
+│   │   ├── Security.tsx
+│   │   ├── ApiDocs.tsx
 │   ├── css
-│   │   └── style.css
+│   │   ├── style.css
+│   │   ├── accountInfo.css
+│   │   ├── referral.css
 │   ├── pages
 │   │   └── RentPhone.tsx
 │   ├── App.tsx
