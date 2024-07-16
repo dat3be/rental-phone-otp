@@ -26,6 +26,7 @@ app.get('/api/networks', async (req, res) => {
     }
 });
 
+
 const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`Proxy server is running on http://localhost:${PORT}`);
