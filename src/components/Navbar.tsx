@@ -1,26 +1,38 @@
 import React from 'react';
-import { Layout, Row, Col, Typography, Avatar, Button, Badge } from 'antd';
-import { BellOutlined } from '@ant-design/icons';
-import '../css/style.css';
+import { Badge, Avatar, Dropdown, Menu, Button } from 'antd';
+import { BellOutlined, UserOutlined } from '@ant-design/icons';
+import '../css/navbar.css';
 
-const { Header } = Layout;
-const { Text } = Typography;
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="/profile">Profile</a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <a href="/settings">Settings</a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">Logout</Menu.Item>
+  </Menu>
+);
 
-const Navbar: React.FC = () => (
-<Header className="navbar" style={{ backgroundColor: '#001529', padding: '0 20px' }}>
-<Row justify="end" align="middle" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}> {/* Align to 'end' (right) */}
-        <Col> {/* Removed unnecessary Col and flex styles */}
-          <Button type="primary" style={{ marginRight: '10px' }}>Nạp tiền</Button>
-          <Text style={{ marginRight: '10px', color: 'white' }}>5,800đ</Text>
-          <Badge count={5}> 
-            <BellOutlined style={{ color: 'white', fontSize: '20px' }} />
-          </Badge>
-          <Avatar style={{ backgroundColor: '#f56a00', verticalAlign: 'middle' }} size="large">
-            D
-          </Avatar>
-        </Col>
-      </Row>
-  </Header>
+const Navbar: React.FC<{ currentView: string; onReload: () => void }> = ({ currentView, onReload }) => (
+  <>
+    <div className="navbar-container">
+      <div className="navbar-right">
+        <Badge count={5}>
+          <BellOutlined style={{ fontSize: '24px', marginRight: '20px' }} />
+        </Badge>
+        <Dropdown overlay={menu} trigger={['click']}>
+          <Avatar size="large" icon={<UserOutlined />} />
+        </Dropdown>
+      </div>
+    </div>
+    <div className="navbar-bottom">
+      <div className="current-view">{currentView}</div>
+      <Button className="reload-btn" onClick={onReload}>Nạp Tiền</Button>
+    </div>
+  </>
 );
 
 export default Navbar;

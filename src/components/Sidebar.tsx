@@ -9,9 +9,9 @@ import {
   DollarOutlined,
   BookOutlined,
   InfoCircleOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
 } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import '../css/sidebar.css';
 
 interface SidebarProps {
   setCurrentView: (view: string) => void;
@@ -19,14 +19,14 @@ interface SidebarProps {
   toggleCollapsed: () => void;
 }
 
-const items = [
+const items: MenuProps['items'] = [
   { label: 'Thông tin tài khoản', key: '1', icon: <UserOutlined /> },
   { label: 'Nạp tiền', key: '2', icon: <WalletOutlined /> },
   { label: 'Lịch sử nạp tiền', key: '3', icon: <HistoryOutlined /> },
   {
+    type: 'group',
     label: 'Thuê Số',
     key: 'g1',
-    type: 'group',
     children: [
       { label: 'Thuê số nhanh', key: '4', icon: <FileOutlined /> },
       { label: 'Thuê số tùy chọn', key: '5', icon: <AppstoreOutlined /> },
@@ -35,9 +35,9 @@ const items = [
     ],
   },
   {
+    type: 'group',
     label: 'Tài Khoản',
     key: 'g2',
-    type: 'group',
     children: [
       { label: 'Nhận hoa hồng', key: '8', icon: <DollarOutlined /> },
       { label: 'Lịch sử chung', key: '9', icon: <HistoryOutlined /> },
@@ -51,11 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentView, collapsed, toggleColl
   <>
     <div className="logo-container">
       <div className="logo">VIOTP</div>
-      {collapsed ? (
-        <MenuUnfoldOutlined className="toggle-btn" onClick={toggleCollapsed} />
-      ) : (
-        <MenuFoldOutlined className="toggle-btn" onClick={toggleCollapsed} />
-      )}
     </div>
     <Menu
       theme="dark"

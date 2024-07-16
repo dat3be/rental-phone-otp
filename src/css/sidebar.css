@@ -1,0 +1,37 @@
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #001529;
+  }
+  
+  .logo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .toggle-btn {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .ant-menu-dark .ant-menu-item-selected {
+    background-color: #1890ff !important;
+  }
+  
+  @media (max-width: 768px) {
+    .ant-layout-sider {
+      position: absolute;
+      z-index: 1000;
+    }
+  
+    .ant-layout-sider-collapsed .ant-menu-item, 
+    .ant-layout-sider-collapsed .ant-menu-submenu-title {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  

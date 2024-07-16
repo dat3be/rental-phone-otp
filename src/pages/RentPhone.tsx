@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Sidebar from '../components/Sidebar';
-import FastRent from '../components/FastRent';
 import AccountInfo from '../components/AccountInfo';
-import PaymentMethods from '../components/PaymentMethods';
 import PaymentHistory from '../components/PaymentHistory';
-import '../css/style.css';
+import PaymentMethods from '../components/PaymentMethods';
+import FastRent from '../components/FastRent';
+import CustomRent from '../components/CustomRent';
 import Navbar from '../components/Navbar';
+import '../css/style.css';
 
 const { Content, Sider } = Layout;
 
 const RentPhone: React.FC = () => {
-  const [currentView, setCurrentView] = useState('4'); // Đặt mặc định là '4' để hiển thị FastRent
+  const [currentView, setCurrentView] = useState('1');
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => {
@@ -29,37 +30,47 @@ const RentPhone: React.FC = () => {
       case '4':
         return <FastRent />;
       case '5':
-        return <div>Thuê Số Tùy Chọn</div>;
-      case '6':
-        return <div>Danh Sách Dịch Vụ</div>;
-      case '7':
-        return <div>Lịch Sử Thuê Số</div>;
-      case '8':
-        return <div>Nhận Hoa Hồng</div>;
-      case '9':
-        return <div>Lịch Sử Chung</div>;
-      case '10':
-        return <div>Tài Liệu API</div>;
-      case '11':
-        return <div>Hướng dẫn</div>;
+        return <CustomRent />;
+      // Add more cases for other views
       default:
         return null;
     }
   };
 
+  const handleReload = () => {
+    setCurrentView('2'); // Set view to "Nạp Tiền"
+  };
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout>
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <Sidebar setCurrentView={setCurrentView} collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
       </Sider>
       <Layout>
-        <Navbar />
-        <Content style={{ marginTop: '64px', marginLeft: '200px', padding: '24px', background: '#fff', minHeight: '280px' }}>
+        <Navbar currentView={getViewName(currentView)} onReload={handleReload} />
+        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           {renderContent()}
         </Content>
       </Layout>
     </Layout>
   );
+};
+
+const getViewName = (view: string) => {
+  switch (view) {
+    case '1':
+      return 'Thông tin tài khoản';
+    case '2':
+      return 'Nạp tiền';
+    case '3':
+      return 'Lịch sử nạp tiền';
+    case '4':
+      return 'Thuê Số Nhanh';
+    case '5':
+      return 'Thuê Số Tùy Chọn';
+    default:
+      return '';
+  }
 };
 
 export default RentPhone;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, Col, Divider, Row, Space, Typography, Alert } from 'antd';
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
-import './../css/AccountInfo.css'; 
+import './../css/accountInfo.css'; 
 
 const { Title, Text } = Typography;
 

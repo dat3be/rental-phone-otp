@@ -1,0 +1,22 @@
+.fast-rent-container {
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fast-rent-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .fast-rent-header .ant-select,
+  .fast-rent-header .ant-btn {
+    margin-right: 16px;
+  }
+  
+  .fast-rent-header .ant-btn:last-child {
+    margin-right: 0;
+  }
+  

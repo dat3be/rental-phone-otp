@@ -1,0 +1,22 @@
+.custom-rent-container {
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-rent-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .custom-rent-header .ant-select,
+  .custom-rent-header .ant-btn {
+    margin-right: 16px;
+  }
+  
+  .custom-rent-header .ant-btn:last-child {
+    margin-right: 0;
+  }
+  

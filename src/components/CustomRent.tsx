@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Select, Button, Table, Alert } from 'antd';
 import axios from 'axios';
-import '../css/fastRent.css';
+import '../css/customRent.css';
 
 const { Option } = Select;
 
-const FastRent: React.FC = () => {
+const CustomRent: React.FC = () => {
+  const [networks, setNetworks] = useState([]);
   const [services, setServices] = useState([]);
   const [countries] = useState([
     { label: 'Tất cả', value: 'all' },
@@ -13,7 +14,21 @@ const FastRent: React.FC = () => {
     { label: 'Lào', value: 'la' },
   ]);
   const [selectedCountry, setSelectedCountry] = useState('all');
+  const [selectedNetwork, setSelectedNetwork] = useState<string | undefined>(undefined);
   const [selectedService, setSelectedService] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchNetworks = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/networks');
+        setNetworks(response.data.data);
+      } catch (error) {
+        console.error('Error fetching networks:', error);
+      }
+    };
+
+    fetchNetworks();
+  }, []);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -79,8 +94,8 @@ const FastRent: React.FC = () => {
   const data: readonly any[] | undefined = [];
 
   return (
-    <div className="fast-rent-container">
-      <div className="fast-rent-header">
+    <div className="custom-rent-container">
+      <div className="custom-rent-header">
         <Select
           defaultValue="all"
           style={{ width: 120, marginRight: 16 }}
@@ -89,6 +104,18 @@ const FastRent: React.FC = () => {
           {countries.map(country => (
             <Option key={country.value} value={country.value}>
               {country.label}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          placeholder="--- Chọn nhà mạng ---"
+          style={{ width: 240, marginRight: 16 }}
+          onChange={value => setSelectedNetwork(value)}
+          value={selectedNetwork}
+        >
+          {networks.map((network: any) => (
+            <Option key={network.id} value={network.id}>
+              {network.name}
             </Option>
           ))}
         </Select>
@@ -119,4 +146,4 @@ const FastRent: React.FC = () => {
   );
 };
 
-export default FastRent;
+export default CustomRent;
