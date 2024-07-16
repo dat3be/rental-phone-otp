@@ -1,0 +1,47 @@
+.api-documentation {
+    padding: 20px;
+  }
+  
+  .api-documentation h2 {
+    margin-bottom: 20px;
+  }
+  
+  .endpoints {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .endpoint {
+    background: #f0f2f5;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .endpoint h3 {
+    margin-bottom: 10px;
+  }
+  
+  .endpoint h4 {
+    margin-top: 20px;
+  }
+  
+  .endpoint ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .endpoint ul li {
+    background: #e6f7ff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .endpoint pre {
+    background: #fafafa;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+  }
+  

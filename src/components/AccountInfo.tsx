@@ -1,92 +1,87 @@
-import React from 'react';
-import { Button, Card, Col, Divider, Row, Space, Typography, Alert } from 'antd';
-import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
-import './../css/accountInfo.css'; 
+import React, { useState } from 'react';
+import { Card, Tabs, Button, Input } from 'antd';
+import '../css/accountInfo.css';
 
-const { Title, Text } = Typography;
+const { TabPane } = Tabs;
 
 const AccountInfo: React.FC = () => {
+  const [telegramConnected, setTelegramConnected] = useState(false);
+
+  const handleTelegramConnect = () => {
+    // Logic to connect Telegram
+    setTelegramConnected(true);
+  };
+
   return (
-    <div className="account-info-container">
-      <Card className="account-info-card">
-        <Row gutter={16} align="middle">
-          <Col span={6}>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Avatar"
-              className="avatar-image"
-            />
-          </Col>
-          <Col span={18}>
-            <Title level={3}>datngo2994</Title>
-            <Text type="secondary">dat.ngo2994@gmail.com</Text>
-            <Divider style={{ margin: '16px 0' }} />
-            <Row gutter={16}>
-              <Col span={8}>
-                <Text>Số dư</Text>
-                <Title level={4}>5,800 đ</Title>
-              </Col>
-              <Col span={8}>
-                <Text>Tổng code đã thuê</Text>
-                <Title level={4}>3</Title>
-              </Col>
-              <Col span={8}>
-                <Text>Lần cuối thuê</Text>
-                <Title level={4}>11/07/2024</Title>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Card>
-
-      <Card>
-        <Title level={4}>Thông tin tài khoản</Title>
-        <Row gutter={16}>
-          <Col span={12}>
-            <div className="info-item">
-              <Text strong>Họ tên:</Text> datngo2994
+    <Card className="account-info-content">
+      <div className="account-info-header">
+        <div className="avatar-section">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="avatar"
+            className="avatar"
+          />
+          <div className="balance-info">
+            <h2>datngo2994</h2>
+            <p>Số dư: <b>5,800đ</b></p>
+            <p>Tổng code đã thuê: <b>3</b></p>
+            <p>Lần cuối thuê: <b>11/07/2024</b></p>
+          </div>
+        </div>
+        <Button type="primary" className="update-button">Cập nhật thông tin</Button>
+      </div>
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="Tổng Quan" key="1">
+          <h3>Thông tin tài khoản</h3>
+          <p><b>Họ tên:</b> datngo2994</p>
+          <p><b>Tên đăng nhập:</b> datngo2994</p>
+          <p><b>E-mail:</b> dat.ngo2994@gmail.com</p>
+          <p><b>Số điện thoại:</b> 84345678462</p>
+          <div>
+            <Button onClick={handleTelegramConnect}>
+              {telegramConnected ? 'Hủy kết nối Telegram' : 'Kết nối Telegram'}
+            </Button>
+          </div>
+          <p>Chú ý! Vui lòng kết nối Telegram Account để tiếp tục sử dụng dịch vụ và được hỗ trợ các tính năng bảo mật.</p>
+        </TabPane>
+        <TabPane tab="Bảo Mật" key="2">
+          <h3>Bảo mật</h3>
+          <p>Email: dat.ngo2994@gmail.com <Button type="primary">Xác thực Email</Button></p>
+          <p>Mật khẩu: ******** <Button>Đổi mật khẩu</Button></p>
+          <p>Bảo mật đăng nhập: Tăng cường độ an toàn cho tài khoản của bạn. Để đăng nhập, bạn sẽ cần nhập mã 6 kí tự được gửi về email đã xác thực của mình.</p>
+        </TabPane>
+        <TabPane tab="Hoa Hồng Mời Bạn" key="3">
+          <h3>Giới thiệu bạn bè nhận thưởng</h3>
+          <p>Thông tin và thể lệ: Giới thiệu bạn bè thành công, bạn có thể được hưởng tới đa 4% số tiền mà bạn bè đã nạp.</p>
+          <Input value="https://viotp.com/Account/Register?referCode=" addonAfter={<Button>Sao chép</Button>} readOnly />
+          <div className="referral-stats">
+            <div className="stat-item">
+              <h4>Tổng Hoa Hồng Đã Nhận</h4>
+              <p>0</p>
             </div>
-            <div className="info-item">
-              <Text strong>Tên đăng nhập:</Text> datngo2994
+            <div className="stat-item">
+              <h4>Hoa Hồng Tuần Này</h4>
+              <p>0</p>
             </div>
-            <div className="info-item">
-              <Space>
-                <MailOutlined />
-                <Text strong>E-mail:</Text> dat.ngo2994@gmail.com
-              </Space>
+            <div className="stat-item">
+              <h4>Số người đã giới thiệu</h4>
+              <p>0</p>
             </div>
-            <div className="info-item">
-              <Space>
-                <PhoneOutlined />
-                <Text strong>Số điện thoại:</Text> 84345678462
-              </Space>
+            <div className="stat-item">
+              <h4>Được giới thiệu bởi</h4>
+              <p>0</p>
             </div>
-          </Col>
-          <Col span={12}>
-            <div className="info-item">
-              <Text strong>Ngày sinh:</Text> 29/09/1994
-            </div>
-            <div className="info-item">
-              <Text strong>Giới tính:</Text> Nam
-            </div>
-            <div className="info-item">
-              <Text strong>Địa chỉ:</Text> Hà Nội, Việt Nam
-            </div>
-            <div className="info-item">
-              <Text strong>Telegram:</Text> <Button type="primary">Kết nối</Button>
-            </div>
-          </Col>
-        </Row>
-      </Card>
-
-      <Alert
-        message="Chú ý!"
-        description="Vui lòng Kết nối Telegram Account để tiếp tục sử dụng dịch vụ và được hỗ trợ các tính năng bảo mật."
-        type="warning"
-        showIcon
-        style={{ marginTop: '24px' }}
-      />
-    </div>
+          </div>
+        </TabPane>
+        <TabPane tab="API" key="4">
+          <h3>API</h3>
+          <div className="api-token">
+            <Input value="e294527c11ab48d99a90563fea32d4c3" readOnly />
+            <Button>Copy</Button>
+          </div>
+        </TabPane>
+      </Tabs>
+    </Card>
   );
 };
 

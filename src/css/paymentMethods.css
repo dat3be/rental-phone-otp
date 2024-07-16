@@ -1,0 +1,38 @@
+.payment-methods-content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-method {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f6f8fa;
+    border-radius: 8px;
+  }
+  
+  .payment-method-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .payment-method-icon {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .payment-method h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .payment-method p {
+    margin: 4px 0;
+    font-size: 16px;
+  }
+  

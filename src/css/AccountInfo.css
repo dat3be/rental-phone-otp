@@ -1,19 +1,95 @@
-/* AccountInfo.css */
-.account-info-container {
-    padding: 24px;
-  }
-  
-  .account-info-card {
-    margin-bottom: 24px;
-  }
-  
-  .avatar-image {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-  }
-  
-  .info-item {
-    margin-bottom: 16px;
-  }
-  
+.account-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.balance-info h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.balance-info p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.update-button {
+  align-self: flex-start;
+}
+
+.ant-tabs-nav .ant-tabs-tab {
+  font-size: 16px;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  font-weight: bold;
+}
+
+.ant-card {
+  border-radius: 8px;
+}
+
+.account-info-content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.referral-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.stat-item:last-child {
+  margin-right: 0;
+}
+
+.stat-item h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #595959;
+}
+
+.stat-item p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.api-token {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.api-token input {
+  flex: 1;
+  margin-right: 10px;
+}

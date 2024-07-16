@@ -7,6 +7,10 @@ import PaymentMethods from '../components/PaymentMethods';
 import FastRent from '../components/FastRent';
 import CustomRent from '../components/CustomRent';
 import ServiceList from '../components/ServiceList';
+import HistoryRent from '../components/HistoryRent';
+import Referral from '../components/Referral';
+import CommonHistory from '../components/CommonHistory';
+import ApiDocumentation from '../components/ApiDocumentation';
 import Navbar from '../components/Navbar';
 import '../css/style.css';
 
@@ -34,6 +38,14 @@ const RentPhone: React.FC = () => {
         return <CustomRent />;
       case '6':
         return <ServiceList />;
+      case '7':
+        return <HistoryRent />;
+      case '8':
+        return <Referral />;
+      case '9':
+        return <CommonHistory />;
+      case '10':
+        return <ApiDocumentation />;
       // Add more cases for other views
       default:
         return null;
@@ -68,11 +80,17 @@ const getViewName = (view: string) => {
     case '3':
       return 'Lịch sử nạp tiền';
     case '4':
-      return 'Thuê Số Nhanh';
+      return 'Thuê Số nhanh';
     case '5':
-      return 'Thuê Số Tùy Chọn';
+      return 'Thuê số tùy chọn';
     case '6':
       return 'Danh sách dịch vụ';
+    case '7':
+      return 'Lịch sử thuê số';
+    case '8':
+      return 'Nhận hoa hồng';
+    case '9':
+      return 'Lịch sử chung';
     default:
       return '';
   }

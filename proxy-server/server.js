@@ -26,6 +26,15 @@ app.get('/api/networks', async (req, res) => {
     }
 });
 
+app.get('/api/history', async (req, res) => {
+  try {
+    const response = await axios.get(`https://api.viotp.com/history/get?token=${apiToken}N`);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch history' });
+  }
+});
+
 
 const PORT = 4000;
 app.listen(PORT, () => {

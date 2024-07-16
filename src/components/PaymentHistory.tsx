@@ -1,83 +1,124 @@
-import React from 'react';
-import { Table, Button, Row, Col, DatePicker, Select, Typography } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import '../css/style.css';
+import React, { useState, useEffect } from 'react';
+import { Table, Select, DatePicker, Input, Button } from 'antd';
+import axios from 'axios';
+import moment from 'moment';
+import { SearchOutlined, DownloadOutlined } from '@ant-design/icons';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const { Option } = Select;
-const { Title, Text } = Typography;
+const { RangePicker } = DatePicker;
+const { Search } = Input;
 
 const columns = [
   {
     title: '#',
-    dataIndex: 'key',
-    key: 'key',
+    dataIndex: 'index',
+    key: 'index',
   },
   {
-    title: 'THỜI GIAN',
-    dataIndex: 'time',
-    key: 'time',
-  },
-  {
-    title: 'SỐ TIỀN',
+    title: 'Số Tiền',
     dataIndex: 'amount',
     key: 'amount',
+    render: (text: number) => text.toLocaleString('vi-VN'),
   },
   {
-    title: 'SỐ DƯ SAU BIẾN ĐỘNG',
+    title: 'Số Dư Sau Biến Động',
     dataIndex: 'balance',
     key: 'balance',
+    render: (text: number) => text.toLocaleString('vi-VN'),
   },
   {
-    title: 'NỘI DUNG',
+    title: 'Nội Dung',
     dataIndex: 'description',
     key: 'description',
   },
-];
-
-const data = [
   {
-    key: '1',
-    time: '11/07/2024 19:25:56',
-    amount: '10,000',
-    balance: '10,000',
-    description: 'Nạp Bank: BMAACDACBDADCMB',
+    title: 'Thời Gian',
+    dataIndex: 'timestamp',
+    key: 'timestamp',
+    render: (text: string) => moment(text).format('DD/MM/YYYY HH:mm:ss'),
   },
-  // Thêm dữ liệu khác tại đây
 ];
 
-const PaymentHistory: React.FC = () => (
-  <div style={{ padding: '24px' }}>
-    <Title level={3}>Lịch sử nạp tiền</Title>
-    <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
-      <Col span={8}>
-        <Text>Từ ngày</Text>
-        <DatePicker className="full-width" placeholder="Chọn ngày" />
-      </Col>
-      <Col span={8}>
-        <Text>Đến ngày</Text>
-        <DatePicker className="full-width" placeholder="Chọn ngày" />
-      </Col>
-      <Col span={8}>
-        <Text>Loại</Text>
-        <Select className="full-width" defaultValue="Tất cả">
-          <Option value="all">Tất cả</Option>
-          <Option value="bank">Ngân hàng</Option>
-          <Option value="viettel">Viettel Money</Option>
-          <Option value="payeer">Payeer</Option>
-          <Option value="usdt">USDT TRC20</Option>
-        </Select>
-      </Col>
-    </Row>
-    <Button type="primary" icon={<SearchOutlined />}>Tìm kiếm</Button>
-    <Table
-      style={{ marginTop: '24px' }}
-      columns={columns}
-      dataSource={data}
-      pagination={{ pageSize: 50 }}
-      title={() => 'Danh sách 200 giao dịch nạp tiền thành công gần nhất'}
-      footer={() => 'Footer'}
-    />
-  </div>
-);
+const PaymentHistory: React.FC = () => {
+  const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState('');
+  const [filter, setFilter] = useState({
+    startDate: null,
+    endDate: null,
+  });
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  const fetchHistory = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('http://localhost:4000/api/payment-history');
+      const data = response.data.data.map((item: any, index: number) => ({ ...item, index: index + 1 }));
+      setHistory(data);
+    } catch (error) {
+      console.error('Error fetching payment history:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = (value: string) => {
+    setSearchText(value);
+    // Filtering logic based on searchText
+  };
+
+  const handleFilterChange = (key: string, value: any) => {
+    setFilter((prev) => ({ ...prev, [key]: value }));
+    // Apply filter logic here
+  };
+
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(history);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'PaymentHistory');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(data, 'payment_history.xlsx');
+  };
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <Button type="primary" onClick={() => handleFilterChange('service', '')}>
+          Nạp tiền
+        </Button>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <RangePicker
+          style={{ marginRight: '10px' }}
+          onChange={(dates) => handleFilterChange('dateRange', dates)}
+        />
+        <Input
+          placeholder="Tìm kiếm"
+          onChange={(e) => handleSearch(e.target.value)}
+          style={{ width: 300, marginRight: '10px' }}
+        />
+        <Button type="primary" icon={<SearchOutlined />} onClick={() => handleSearch(searchText)}>
+          Tìm kiếm
+        </Button>
+        <Button type="primary" icon={<DownloadOutlined />} onClick={exportToExcel} style={{ marginLeft: '10px' }}>
+          Xuất Excel
+        </Button>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={history}
+        loading={loading}
+        rowKey="id"
+        pagination={{ pageSize: 50 }}
+      />
+    </div>
+  );
+};
 
 export default PaymentHistory;
